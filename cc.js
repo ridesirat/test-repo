@@ -175,7 +175,7 @@ class scorePage extends baseElement {
     }
     plus() {
         let element;
-        if (player == undefined) element = document.querySelector(".selected")
+        if (player == undefined) { element = document.querySelector(".selected"); player = element.dataset.prop }
         else element = document.querySelector(`[data-prop = "${player}"]`)
         let value = parseInt(element.value) + 1;
         element.value = value;
@@ -188,7 +188,7 @@ class scorePage extends baseElement {
     }
     minus() {
         let element;
-        if (player == undefined) element = document.querySelector(".selected")
+        if (player == undefined) { element = document.querySelector(".selected"); player = element.dataset.prop }
         else element = document.querySelector(`[data-prop = "${player}"]`)
         let value = parseInt(element.value) - 1;
         if (value < 0) return
