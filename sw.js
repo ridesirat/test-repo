@@ -14,6 +14,7 @@ const refresh = async function () {
 }
 
 self.onmessage = async function (event) {
+    console.log(event);
     if (event.type == 'REFRESH') return refresh();
     if (lang == event.lang) return;
     lang = event.lang;
