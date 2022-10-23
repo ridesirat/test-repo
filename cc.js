@@ -1,13 +1,15 @@
+// Desliguei Dice Page:260
+
+
+
 const origin = ""//"https://culturecrossover.eu";
 let lang = "eng";
 let appReady = false;
-let deferredPrompt;
+
 let gameNumber = 'game';
 let player;
 
 const pages = {
-    //"index.html": "main-page",
-    //"start": "start-page",
     "index.html": "lang-page",
     "players": "player-page",
     "scores": "score-page",
@@ -17,6 +19,52 @@ const pages = {
     "dice": "dice-page",
     "trivia": "trivia-page",
     "culture": "culture-page"
+}
+
+const translate = {
+    eng: {
+        players: "Players",
+        fortune: "Fortune",
+        culture: "Culture",
+        trivia: "Trivia"
+    },
+    pol: {
+        players: "Osoby grające",
+        fortune: "Losu",
+        culture: "Kultury",
+        trivia: "TCiekawostki"
+    },
+    ger: {
+        players: "Spieler*innen",
+        fortune: "Glück",
+        culture: "Kultur",
+        trivia: "TWissen"
+    },
+    ita: {
+        players: "Giocatoris",
+        fortune: "Fortuna",
+        culture: "Cultura",
+        trivia: "Curiosità"
+    },
+    por: {
+        players: "Jogadores",
+        fortune: "Sorte",
+        culture: "Cultura",
+        trivia: "Curiosidades"
+    },
+    gre: {
+        players: "Παίχτες",
+        fortune: "Τύχης",
+        culture: "Πολιτισμού",
+        trivia: "TΑσήμαντα πράγματα"
+    },
+    ukr: {
+        players: "Pгравців",
+        fortune: "Фортуна",
+        culture: "Культура",
+        trivia: "Дрібниці"
+    }
+
 }
 
 
@@ -66,6 +114,8 @@ class baseElement extends HTMLElement {
     render(selector) {
         let temp = document.querySelector(`[part = ${selector}]`).content.cloneNode(true);
         this.appendChild(temp);
+        let slots = document.querySelectorAll(`[data-slot]`);
+        for (let i of slots) { i.textContent = translate[lang][i.dataset.slot] }
     }
 
     unselect() {
@@ -82,42 +132,23 @@ class baseElement extends HTMLElement {
 
 }
 
-/* removing page
-
-class mainPage extends baseElement {
-    constructor() { super() }
-
-    async app({ target }) {
-        let prompt = await deferredPrompt.prompt();
-        let choice = await prompt.userChoice;
-        if (choice.outcome === 'accepted') {
-            deferredPrompt = null;
-            target.style.display = none;
-        }
-    }
-    connectedCallback() { this.render('main-page'); super.connectedCallback() }
-}
-
-*/
-
-
-
-
 
 class langPage extends baseElement {
     constructor() { super() }
 
-    setLanguage(event) { lang = event.target.dataset.lang; }
+    async setLanguage(event) {
+        lang = event.target.dataset.lang;
+        let ready = await navigator.serviceWorker.ready;
+        navigator.serviceWorker.controller.postMessage({ type: 'LANGUAGE', msg: lang });
+
+    }
+    async refresh() {
+        let ready = await navigator.serviceWorker.ready;
+        navigator.serviceWorker.controller.postMessage({ type: 'REFRESH', });
+    }
 
     connectedCallback() { this.render('lang-page'); super.connectedCallback() }
 }
-
-
-
-
-
-
-
 
 class playerPage extends baseElement {
     constructor() { super() }
@@ -132,7 +163,6 @@ class playerPage extends baseElement {
         game.players.push({ name: undefined, badges: 0, visa: 0, ticket: 0 })
         localStorage.setItem(gameNumber, JSON.stringify(game))
         document.querySelector('[part = "temp-lit"]').diff();
-
 
     }
 
@@ -165,7 +195,6 @@ class playerPage extends baseElement {
 }
 
 
-
 class scorePage extends baseElement {
     constructor() { super() }
     select({ target }) {
@@ -175,7 +204,7 @@ class scorePage extends baseElement {
     }
     plus() {
         let element;
-        if (player == undefined) { element = document.querySelector(".selected"); player = element.dataset.prop }
+        if (player == undefined) { element = document.querySelector(".selected"); if (!element) return; player = element.dataset.prop }
         else element = document.querySelector(`[data-prop = "${player}"]`)
         let value = parseInt(element.value) + 1;
         element.value = value;
@@ -188,7 +217,7 @@ class scorePage extends baseElement {
     }
     minus() {
         let element;
-        if (player == undefined) { element = document.querySelector(".selected"); player = element.dataset.prop }
+        if (player == undefined) { element = document.querySelector(".selected"); if (!element) return; player = element.dataset.prop }
         else element = document.querySelector(`[data-prop = "${player}"]`)
         let value = parseInt(element.value) - 1;
         if (value < 0) return
@@ -201,10 +230,8 @@ class scorePage extends baseElement {
         document.querySelector('[part = "temp-lit"]').diff()
     }
 
-    dice() { window.open("https://app.culturecrossover.eu/dice/"); }
     connectedCallback() { this.render('score-page'); super.connectedCallback() }
 }
-
 
 
 class errorPage extends baseElement {
@@ -261,19 +288,55 @@ class culturePage extends baseElement {
         }
         else { target.style.backgroundColor = "red" }
     }
+    flip({ target }) {
+
+        target.remove()
+        let visible = document.querySelectorAll('.hide');
+        visible.forEach(x => x.remove())
+        console.log(visible)
+        let hidden = document.querySelectorAll('.hidden')
+        console.log(hidden)
+        hidden.forEach(x => x.classList.remove('hidden'))
+        console.log('hidden done')
+    }
     connectedCallback() { this.render('culture-page'); super.connectedCallback() }
 }
 
 // Turned off to present as before while fixing the Dice page
 
-// class dicePage extends baseElement {
-// 	constructor() { super() }
+class dicePage extends baseElement {
+    constructor() { super() }
+    roll() {
 
-// 	select() {
+        const dadoImg = document.getElementById("img_dado");
+        const audio_fx_01 = document.getElementById("audio_fx_01");
+        const audio_fx_02 = document.getElementById("audio_fx_02");
+        const audio_fx_03 = document.getElementById("audio_fx_03");
+        const audio_fx = [audio_fx_01, audio_fx_02, audio_fx_03];
 
-// 	}
-// 	connectedCallback() { this.render('dice-page'); super.connectedCallback() }
-// }
+        let dadoNum = Math.ceil(Math.random() * 6);
+        let audioNum = Math.floor(Math.random() * 3);
+        if (dadoNum === 1 || dadoNum === 6) {
+            dadoNum = 1;
+        }
+        else if (dadoNum === 3 || dadoNum === 5) {
+            dadoNum = 2;
+        }
+        else if (dadoNum === 2 || dadoNum === 4) {
+            dadoNum = 3;
+        }
+        audio_fx[audioNum].play();
+        dadoImg.classList.toggle("rola");
+        setTimeout(() => {
+            dadoImg.classList.toggle("rola");
+        }, 1000);
+
+        setTimeout(() => {
+            dadoImg.src = `https://app.culturecrossover.eu/dice/dice-${dadoNum}.jpg`;
+        }, 200);
+    }
+    connectedCallback() { this.render('dice-page'); super.connectedCallback() }
+}
 
 
 customElements.define('base-element', baseElement)
@@ -284,7 +347,7 @@ customElements.define('score-page', scorePage)
 
 
 customElements.define('fortune-page', fortunePage)
-// customElements.define('dice-page', dicePage) Turned of while dice is not working
+customElements.define('dice-page', dicePage)
 customElements.define('trivia-page', triviaPage)
 customElements.define('culture-page', culturePage)
 //customElements.define('404-page', errorPage)
@@ -320,6 +383,7 @@ class playerBoard extends slotElement {
             str +=
                 `<input type="text"  ${p.name ? `value = "${p.name}"` : `placeholder = "P${i + 1}"`}><svg data-event = "minus" class = 'svg-icon' class = 'svg-icon' data-index = ${i} fill="none" xmlns="http://www.w3.org/2000/svg" > <use href="#minus"/></svg>`
         };
+        str += `<svg data-event="plus" class='svg-icon' class='svg-icon back' fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#plus" /></svg>`
         frag.innerHTML = str;
         this.innerHTML = '';
         this.appendChild(frag.content)
@@ -342,8 +406,6 @@ class scoreBoard extends slotElement {
                 `<score-row>
             <strong data-prop="0-name" >${p.name}</strong>
             <input readonly data-event='select' data-prop="${i}-badges" value = ${p.badges}></input>
-            <!-- This was abandoned
-				<input readonly data-event='select' data-prop="${i}-visa" value = ${p.visa}></input> -->
             <input readonly data-event='select' data-prop="${i}-ticket" value = ${p.ticket}></input>
         </score-row>`
         };
@@ -352,7 +414,11 @@ class scoreBoard extends slotElement {
         this.appendChild(frag.content)
         let selected = document.querySelectorAll(`[data-prop = "${player}"]`).forEach(el => el.classList.add('selected'))
         let sel = document.querySelectorAll('.selected')
-        if (sel.length == 0) document.querySelector('input').classList.add('selected')
+        if (sel.length == 0) {
+            let inputs = document.querySelectorAll('input');
+            if (inputs.length > 0) inputs[0].classList.add('selected');
+
+        }
 
     }
 }
@@ -447,33 +513,52 @@ class cultureCard extends slotElement {
         let culture = parsed[deck[iter]]
 
         let frag = document.createElement('template')
+
         let str =
-            `<div class="culture-question">${culture.question}</div>
-			
-			${culture.opt_a ?
-                `<button data-event = "select" data-val = ${culture.correct == "A" ? "correct" : "incorrect"}>${culture.opt_a}</button>
-			<br>
-			<button data-event = "select" data-val = ${culture.correct == "B" ? "correct" : "incorrect"}>${culture.opt_b}</button>
-			<br>
-			<button data-event = "select" data-val = ${culture.correct == "C" ? "correct" : "incorrect"}>${culture.opt_c}</button>
-			<div class="culture-answer">
-				${culture.explain}
-				</div>
-			`
+            `<div class='hide culture-question'>${culture.question}</div>
+
+            ${culture.opt_a ?
+                `<div class = 'hide'>
+                <button data-event = "select" data-val = ${culture.correct == "A" ? "correct" : "incorrect"}>${culture.opt_a}</button>
+                <br>
+                <button data-event = "select" data-val = ${culture.correct == "B" ? "correct" : "incorrect"}>${culture.opt_b}</button>
+                <br>
+                <button data-event = "select" data-val = ${culture.correct == "C" ? "correct" : "incorrect"}>${culture.opt_c}</button>
+            </div>
+                `
                 : ``}
+            <br>
+
 			${culture.truth ?
-                `<button data-event = "select" data-val = ${culture.truth == "true" ? "correct" : "incorrect"}>TRUE</button>
+                `<div class = 'hide'>
+                <button data-event = "select" data-val = ${culture.truth == "true" ? "correct" : "incorrect"}>TRUE</button>
 				<br>
 				<button data-event = "select" data-val = ${culture.truth == "false" ? "correct" : "incorrect"}>FALSE</button>
 				<br>
-				</div>
-				<div class="culture-answer">
+			</div>`
+                : ``} 
+            <br>
+
+            ${culture.explain ?
+                `<div class="culture-answer hidden">
 				${culture.explain}
-				</div>
-				`
-                : ``} <div class="culture-answer">
-				${culture.explain}
-				</div>`
+			</div>`
+                : ``} 
+
+            <svg class = 'center hide' data-event="flip" xmlns="http://www.w3.org/2000/svg" width="17.6mm" height="17.5mm" viewBox="0 0 50 49.7">
+            <defs>
+                <style>
+                .cls-1 { fill: none; stroke: #59ba9d; stroke-miterlimit: 10; stroke-width: 5.51px;}
+                .cls-2 { fill: #59ba9d; }
+                </style>
+            </defs>
+            <g id="Layer_1" data-name="Layer 1">
+                <g>
+                <path class="cls-1" d="M19.9,43.4a18.3,18.3,0,0,1-4.8-2.5,16.8,16.8,0,1,1,20.1-27l.9.8"/>
+                <polygon class="cls-2" points="43.3 7.8 27 19.6 41.1 21.8 43.3 7.8"/>
+                </g>
+            </g>
+            </svg>`
 
         frag.innerHTML = str;
         this.innerHTML = '';
