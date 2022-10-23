@@ -6,13 +6,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>App Testing :: Culture Crossover</title>
-	<!-- <link rel="preload" href="../assets/dado_fx_01.mp3" as="audio"> -->
-	<!-- <link rel="preload" href="../assets/dado_fx_02.mp3" as="audio"> -->
-	<!-- <link rel="preload" href="../assets/dado_fx_03.mp3" as="audio"> -->
 
-	<script src="cc.js">
-      // if (navigator.serviceWorker) { navigator.serviceWorker.register('../sw.js');} 
-	</script>
+	<script> navigator.serviceWorker ? navigator.serviceWorker.register('../sw.js') : "";</script>
+	<script src="cc.js" defer></script>
+	
 	<link rel="stylesheet" href="layouts.css">
 
 </head>
@@ -132,6 +129,14 @@
 			<svg class='cclogo' fill="none" xmlns="http://www.w3.org/2000/svg">
 				<use href="#cclogo" />
 			</svg>
+		<button data-event="refresh" class="refresh" >
+			<svg version="1.1" viewBox="0 0 13.278 13.448" xmlns="http://www.w3.org/2000/svg">
+			<g transform="translate(-151.36 -47.705)">
+			<path d="m164.63 47.705-2.0981 1.5188-0.14004-0.12454-0.0336-0.02532c-1.1418-0.85015-2.4654-1.2914-3.793-1.3513-2.2127-0.09984-4.4371 0.86207-5.8539 2.7652-2.2668 3.045-1.6318 7.3793 1.4134 9.6459l4e-3 0.0036 5e-3 0.0036c0.59422 0.43198 1.249 0.77255 1.9436 1.0118l0.632-1.8335c-0.51155-0.17625-0.99358-0.42736-1.4314-0.74518-2.1998-1.6417-2.6504-4.7263-1.0108-6.9288 1.5637-2.1005 4.4389-2.6028 6.6136-1.2258l-1.988 1.4392 4.9635 0.77411z" style="color-rendering:auto;color:#000000;dominant-baseline:auto;fill:#f00;font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;font-variation-settings:normal;image-rendering:auto;inline-size:0;isolation:auto;mix-blend-mode:normal;shape-margin:0;shape-padding:0;shape-rendering:auto;solid-color:#000000;stop-color:#000000;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+			</g>
+			</svg>
+		</button>
+			
 		</top-box>
 		<lang-table class='center langer'>
 			<svg class="svg-icon-large" data-event="setLanguage" data-page="players" data-lang="eng" version="1.1" viewBox="0 0 80.862 70.592" xmlns="http://www.w3.org/2000/svg">
@@ -207,16 +212,13 @@
 			<svg class='svg-icon back' data-event="back" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<use href="#back" />
 			</svg>
-			<h1>Players</h1>
+			<h1 data-slot = "players"></h1>
 			<svg class='cclogo' fill="none" xmlns="http://www.w3.org/2000/svg">
 				<use href="#cclogo" />
 			</svg>
 		</top-box>
 		<player-board class='center' part='temp-lit'></player-board>
 		<play-box>
-			<svg data-event="plus" class='svg-icon' class='svg-icon back' fill="none" xmlns="http://www.w3.org/2000/svg">
-				<use href="#plus" />
-			</svg>
 			<svg data-event='start' data-page='scores' class="svg-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<use href="#play" />
 			</svg>
@@ -322,7 +324,7 @@
 			</svg>
 
 			<!-- Changed from data-page to data-event to use as before while is not fixed -->
-			<svg data-event="dice" data-pageNOT="dice" class='dice' viewBox="0 0 120 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg  data-page="dice" class='dice' viewBox="0 0 120 85" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g filter="url(#filter0_d_680_1879)">
 					<circle cx="59.9999" cy="39.5166" r="39.4833" fill="white" />
 				</g>
@@ -506,32 +508,16 @@
 							stroke: #e65014;
 							stroke-width: 4px;
 						}
-
-						.a,
-						.c,
-						.d {
-							stroke-miterlimit: 10;
-						}
-
-						.b {
-							fill: #5ab99b;
-						}
-
-						.c,
-						.d {
+						.a,.c,.d { stroke-miterlimit: 10;}
+						.b { fill: #5ab99b;}
+						.c,.d {
 							fill: none;
 							stroke: #5ab99b;
 						}
-
-						.c {
-							stroke-width: 3.47px;
-						}
-
-						.d {
-							stroke-width: 4.28px;
-						}
+						.c {stroke-width: 3.47px;}
+						.d {stroke-width: 4.28px;}
 					</style>
-				</defs>
+				</defs> 
 				<g>
 					<rect class="a" x="3" y="3" width="94.1" height="94.06" rx="18.7" />
 					<g>
@@ -561,7 +547,7 @@
 			<svg class='svg-icon back' data-event="back" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<use href="#back" />
 			</svg>
-			<h1>Trivia Card</h1>
+			<h1 data-slot = 'trivia'></h1>
 			<svg class='cclogo' fill="none" xmlns="http://www.w3.org/2000/svg">
 				<use href="#cclogo" />
 			</svg>
@@ -590,7 +576,7 @@
 			<svg class='svg-icon back' data-event="back" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<use href="#back" />
 			</svg>
-			<h1>Culture Card</h1>
+			<h1 data-slot = 'culture'></h1>
 			<svg class='cclogo' fill="none" xmlns="http://www.w3.org/2000/svg">
 				<use href="#cclogo" />
 			</svg>
@@ -620,7 +606,7 @@
 			<svg class='svg-icon back' data-event="back" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<use href="#back" />
 			</svg>
-			<h1>Fortune Card</h1>
+			<h1 data-slot = 'fortune'></h1>
 			<svg class='cclogo' fill="none" xmlns="http://www.w3.org/2000/svg">
 				<use href="#cclogo" />
 			</svg>
@@ -629,7 +615,22 @@
 	</template>
 
 
-	<!-- Dice page out. Considering keeping it apart -->
+	<template part = 'dice-page'>
+		
+		<div class="body-dice">
+		<svg class='svg-icon back' data-event="back" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<use href="#back" />
+		</svg>
+		<!-- <img src="logo-cc-rossover-hor.svg" height="50px" alt=""> -->
+		<div class="dado-box"><img src="https://app.culturecrossover.eu/dice/dice-1.jpg" id="img_dado"></div>
+		<button data-event="roll" class="rolar-button" id="rolar_button"></button>
+		<audio id="audio_fx_01" src="https://app.culturecrossover.eu/dice/dado_fx_01.mp3"></audio>
+		<audio id="audio_fx_02" src="https://app.culturecrossover.eu/dice/dado_fx_02.mp3"></audio>
+		<audio id="audio_fx_03" src="https://app.culturecrossover.eu/dice/dado_fx_03.mp3"></audio>
+	</div>
+	</template>
+
+	
 
 </body>
 
