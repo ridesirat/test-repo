@@ -138,12 +138,12 @@ class langPage extends baseElement {
 
     async setLanguage(event) {
         lang = event.target.dataset.lang;
-        let ready = await navigator.serviceWorker.ready;
+        //let ready = await navigator.serviceWorker.ready;
         navigator.serviceWorker.controller.postMessage({ type: 'LANGUAGE', msg: lang });
 
     }
     async refresh() {
-        let ready = await navigator.serviceWorker.ready;
+        //let ready = await navigator.serviceWorker.ready;
         navigator.serviceWorker.controller.postMessage({ type: 'REFRESH', });
     }
 
