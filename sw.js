@@ -15,8 +15,8 @@ const refresh = async function () {
 
 self.onmessage = async function (event) {
     console.log(event);
-    if (event.type == 'REFRESH') return refresh();
-    if (lang == event.lang) return;
+    if (event.data.type == 'REFRESH') return refresh();
+    if (lang == event.data.lang) return;
     lang = event.lang;
     try {
         let files = [];
