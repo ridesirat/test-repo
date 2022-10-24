@@ -6,7 +6,7 @@ let cards = ["trivia-cards", "culture-cards"];
 let countries = ["al", "cv", "che", "ch", "eg", "fr", "ge", "gh", "gr", "ir", "it", "pl", "pt", "sy", "uk"]
 
 const refresh = async function () {
-    console.log('refreshing');
+    lang = '';
     try {
         let keys = await caches.keys();
         await Promise.all(keys.map(key => { return caches.delete(key) }))
@@ -18,7 +18,6 @@ self.onmessage = async function (event) {
     if (event.data.type == 'REFRESH') return refresh();
     if (lang == event.data.msg){ return;}
     lang = event.data.msg;
-    console.log(lang)
     try {
         let files = [];
         for (let x of cards) {
@@ -27,9 +26,8 @@ self.onmessage = async function (event) {
             }
         }
         files.push(`https://app.culturecrossover.eu/wp-json/crossover/${lang}/fortune-cards`)
-        console.log(files)
+        Promise.reject();
         let cache = await caches.open(cacheName);
-        console.log(cache)
         await cache.addAll(files);
     }
     catch {
@@ -55,7 +53,7 @@ self.onactivate = function (event) {
 
 const handler = async function (request) {
     let res = await caches.match(request);
-    if (res) return res;
+    if (res){console.log('return from cache'); return res;}
     return fetch(request);
 }
 self.onfetch = async function (event) { event.respondWith(handler(event.request)) }
