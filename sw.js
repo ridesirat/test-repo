@@ -30,8 +30,6 @@ self.onmessage = async function (event) {
                 files.push(`https://app.culturecrossover.eu/wp-json/crossover/${lang}/${x}/${i}`)
             }
         }
-        for (let x of staticFiles) { files.push(x) };
-        files.push(`https://app.culturecrossover.eu/wp-json/crossover/${lang}/fortune-cards`)
         let cache = await caches.open(cacheName);
         await cache.addAll(files);
     }
@@ -52,6 +50,8 @@ self.onactivate = function (event) {
         let claim = await clients.claim();
         let keys = await caches.keys();
         await Promise.all(keys.map(key => { if (key !== cacheName) return caches.delete(key) }))
+        let cache = await caches.open(cacheName);
+        await cache.addAll(staticFiles);
     }()
     );
 };
