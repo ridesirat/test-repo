@@ -4,7 +4,7 @@ let cacheName = `static-${version}`;
 let lang;
 let cards = ["trivia-cards", "culture-cards"];
 let countries = ["al", "cv", "che", "ch", "eg", "fr", "ge", "gh", "gr", "ir", "it", "pl", "pt", "sy", "uk"]
-let staticFiles = [
+let staticFiles = ["index.html", "cc.js", "sw.js", "manifest.json", "layouts.css",
     "xadrez-chegada.svg", "btn-dice_roll.svg", "https://app.culturecrossover.eu/dice/dado_fx_02.mp3",
     "https://app.culturecrossover.eu/dice/dado_fx_01.mp3", "https://app.culturecrossover.eu/dice/dado_fx_03.mp3",
     "https://app.culturecrossover.eu/dice/dice-1.jpg"
