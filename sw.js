@@ -6,6 +6,7 @@ let cards = ["trivia-cards", "culture-cards"];
 let countries = ["al", "cv", "che", "ch", "eg", "fr", "ge", "gh", "gr", "ir", "it", "pl", "pt", "sy", "uk"]
 
 const refresh = async function () {
+    console.log('refreshing');
     try {
         let keys = await caches.keys();
         await Promise.all(keys.map(key => { return caches.delete(key) }))
@@ -16,8 +17,9 @@ const refresh = async function () {
 self.onmessage = async function (event) {
     console.log(event.data);
     if (event.data.type == 'REFRESH') return refresh();
-    if (lang == event.data.lang) return;
+    if (lang == event.data.lang){console.log(`${lang} : ${event.data.lang}`) return;}
     lang = event.data.lang;
+    console.log(lang)
     try {
         let files = [];
         for (let x of cards) {
