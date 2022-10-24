@@ -4,6 +4,11 @@ let cacheName = `static-${version}`;
 let lang;
 let cards = ["trivia-cards", "culture-cards"];
 let countries = ["al", "cv", "che", "ch", "eg", "fr", "ge", "gh", "gr", "ir", "it", "pl", "pt", "sy", "uk"]
+let staticFiles = [
+    "xadrez-chegada.svg", "btn-dice_roll.svg", "https://app.culturecrossover.eu/dice/dado_fx_02.mp3",
+    "https://app.culturecrossover.eu/dice/dado_fx_01.mp3", "https://app.culturecrossover.eu/dice/dado_fx_03.mp3",
+    "https://app.culturecrossover.eu/dice/dice-1.jpg"
+]
 
 const refresh = async function () {
     lang = '';
@@ -25,6 +30,7 @@ self.onmessage = async function (event) {
                 files.push(`https://app.culturecrossover.eu/wp-json/crossover/${lang}/${x}/${i}`)
             }
         }
+        for (let x of staticFiles) { files.push(x) };
         files.push(`https://app.culturecrossover.eu/wp-json/crossover/${lang}/fortune-cards`)
         let cache = await caches.open(cacheName);
         await cache.addAll(files);
