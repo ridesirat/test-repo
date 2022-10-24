@@ -26,13 +26,15 @@ self.onmessage = async function (event) {
             }
         }
         files.push(`https://app.culturecrossover.eu/wp-json/crossover/${lang}/fortune-cards`)
+        console.log(files)
         let cache = await caches.open(cacheName);
+        console.log(cache)
         await cache.addAll(files);
     }
     catch {
+        console.log('cache failed')
         let clients = await self.clients.matchAll({type : 'window'});
-        if(clients[0])
-        clients[0].postMessage({ type: "ERROR", msg: "cache fail", });
+        if(clients && clients.length >= 1) clients[0].postMessage({ type: "ERROR", msg: "cache fail", });
     }
 }
 
