@@ -11,7 +11,7 @@ const refresh = async function () {
         let keys = await caches.keys();
         await Promise.all(keys.map(key => { return caches.delete(key) }))
     }
-    catch { client.postMessage({ msg: "refresh fail" }) }
+    catch (err){ client.postMessage({ msg: "refresh fail" }) }
 }
 
 self.onmessage = async function (event) {
@@ -30,7 +30,7 @@ self.onmessage = async function (event) {
         let cache = await caches.open(cacheName);
         await cache.addAll(files);
     }
-    catch {
+    catch (err){
         console.log('cache failed')
         let clients = await self.clients.matchAll({type : 'window'});
         if(clients && clients.length >= 1) clients[0].postMessage({ type: "ERROR", msg: "cache fail", });
