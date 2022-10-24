@@ -14,10 +14,10 @@ const refresh = async function () {
 }
 
 self.onmessage = async function (event) {
-    console.log(event);
+    console.log(event.data);
     if (event.data.type == 'REFRESH') return refresh();
     if (lang == event.data.lang) return;
-    lang = event.lang;
+    lang = event.data.lang;
     try {
         let files = [];
         for (let x of cards) {
@@ -29,8 +29,10 @@ self.onmessage = async function (event) {
         let cache = await caches.open(cacheName);
         await cache.addAll(files);
     }
-    catch (err) {
-        client.postMessage({ msg: "cache fail", });
+    catch {
+        let clients = await self.clients.matchAll({type : 'window'});
+        if(clients[0])
+        clients[0].postMessage({ type: "ERROR", msg: "cache fail", });
     }
 }
 
