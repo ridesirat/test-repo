@@ -26,7 +26,6 @@ self.onmessage = async function (event) {
             }
         }
         files.push(`https://app.culturecrossover.eu/wp-json/crossover/${lang}/fortune-cards`)
-        Promise.reject();
         let cache = await caches.open(cacheName);
         await cache.addAll(files);
     }
