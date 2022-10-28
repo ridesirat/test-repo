@@ -436,7 +436,7 @@ class triviaCard extends slotElement {
         let find = await fetch(url)
         if (!find.ok) return alert('network connection error')
         let parsed = await find.json();
-        if (!cards.trivia[clang] || cards.trivia[clang] !== parsed.length) cards.trivia[clang] = { deck: [...Array(parsed.length).keys()].shuffle(), iter: 0 }
+        if (!cards.trivia[clang] || cards.trivia[clang].length !== parsed.length) cards.trivia[clang] = { deck: [...Array(parsed.length).keys()].shuffle(), iter: 0 }
         let iter = cards.trivia[clang].iter;
         let deck = cards.trivia[clang].deck;
         console.log(deck)
@@ -473,7 +473,7 @@ class fortuneCard extends slotElement {
         let find = await fetch(`https://app.culturecrossover.eu/wp-json/crossover/${lang}/fortune-cards`)
         if (!find.ok) return alert('network connection error')
         let parsed = await find.json();
-        if (!cards.fortune[lang] || cards.fortune[lang] !== parsed.length) cards.fortune[lang] = { deck: [...Array(parsed.length).keys()].shuffle(), iter: 0 }
+        if (!cards.fortune[lang] || cards.fortune[lang].length !== parsed.length) cards.fortune[lang] = { deck: [...Array(parsed.length).keys()].shuffle(), iter: 0 }
         let iter = cards.fortune[lang].iter;
         let deck = cards.fortune[lang].deck;
 
