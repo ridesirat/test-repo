@@ -383,6 +383,7 @@ class playerBoard extends slotElement {
             str +=
                 `<input type="text"  ${p.name ? `value = "${p.name}"` : `placeholder = "P${i + 1}"`}><svg data-event = "minus" class = 'svg-icon' class = 'svg-icon' data-index = ${i} fill="none" xmlns="http://www.w3.org/2000/svg" > <use href="#minus"/></svg>`
         };
+	str += `<svg data-event='start' data-page='scores' class="svg-icon" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#play" /></svg>`
         str += `<svg data-event="plus" class='svg-icon' class='svg-icon back' fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#plus" /></svg>`
         frag.innerHTML = str;
         this.innerHTML = '';
