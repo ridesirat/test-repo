@@ -504,6 +504,7 @@ class cultureCard extends slotElement {
         let find = await fetch(url)
         if (!find.ok) return alert('network connection error')
         let parsed = await find.json();
+	    console.log(cards);
 	    console.log(`${cards.culture[clang].length} --- ${parsed.length}`)
         if (!cards.culture[clang] || cards.culture[clang].length !== parsed.length) cards.culture[clang] = { deck: [...Array(parsed.length).keys()].shuffle(), iter: 0 }
 
