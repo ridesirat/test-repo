@@ -86,8 +86,11 @@ const navigate = async () => {
     let newPage = document.createElement(page)
     newPage.className = 'page';
     let current = document.querySelector('.page')
-    current.disconnect();
-    current.parentNode.replaceChild(newPage, current)
+    if(current){
+    	current.disconnect();
+    	current.parentNode.replaceChild(newPage, current)
+    }
+	else {document.querySelector('body').appendChild(newPage);}
 };
 
 const clickHandle = event => {
