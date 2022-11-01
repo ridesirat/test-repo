@@ -101,6 +101,7 @@ const clickHandle = event => {
 };
 
 window.onpopstate = navigate;
+window.onload = navigate;
 
 //const channel = new BroadcastChannel('loading')
 //channel.onmessage = ({ data }) => data.status == 'loaded' ? appReady() : appFailed();
