@@ -437,7 +437,7 @@ class triviaCard extends slotElement {
         let find = await fetch(url)
         if (!find.ok) return alert('network connection error')
         let parsed = await find.json();
-        if (!cards.trivia[clang] || cards.trivia[clang].length !== parsed.length) cards.trivia[clang] = { deck: [...Array(parsed.length).keys()].shuffle(), iter: 0 }
+        if (!cards.trivia[clang] || cards.trivia[clang].deck.length !== parsed.length) cards.trivia[clang] = { deck: [...Array(parsed.length).keys()].shuffle(), iter: 0 }
         let iter = cards.trivia[clang].iter;
         let deck = cards.trivia[clang].deck;
         console.log(deck)
@@ -474,7 +474,7 @@ class fortuneCard extends slotElement {
         let find = await fetch(`https://app.culturecrossover.eu/wp-json/crossover/${lang}/fortune-cards`)
         if (!find.ok) return alert('network connection error')
         let parsed = await find.json();
-        if (!cards.fortune[lang] || cards.fortune[lang].length !== parsed.length) cards.fortune[lang] = { deck: [...Array(parsed.length).keys()].shuffle(), iter: 0 }
+        if (!cards.fortune[lang] || cards.fortune[lang].deck.length !== parsed.length) cards.fortune[lang] = { deck: [...Array(parsed.length).keys()].shuffle(), iter: 0 }
         let iter = cards.fortune[lang].iter;
         let deck = cards.fortune[lang].deck;
 
@@ -505,8 +505,8 @@ class cultureCard extends slotElement {
         if (!find.ok) return alert('network connection error')
         let parsed = await find.json();
 	    console.log(cards);
-	    console.log(`${cards.culture[clang].length} --- ${parsed.length}`)
-        if (!cards.culture[clang] || cards.culture[clang].length !== parsed.length) cards.culture[clang] = { deck: [...Array(parsed.length).keys()].shuffle(), iter: 0 }
+	    console.log(`${cards.culture[clang].deck.length} --- ${parsed.length}`)
+        if (!cards.culture[clang] || cards.culture[clang].deck.length !== parsed.length) cards.culture[clang] = { deck: [...Array(parsed.length).keys()].shuffle(), iter: 0 }
 
         let iter = cards.culture[clang].iter;
         let deck = cards.culture[clang].deck;
