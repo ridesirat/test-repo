@@ -462,7 +462,7 @@ class triviaCard extends slotElement {
         this.innerHTML = '';
         this.appendChild(frag.content)
         let selected = document.querySelectorAll(`[data-prop = "${player}"]`).forEach(el => el.classList.add('selected'))
-        cards.trivia.iter++;
+        iter++;
         localStorage.setItem('cards', JSON.stringify(cards))
     }
 
@@ -491,7 +491,7 @@ class fortuneCard extends slotElement {
         this.innerHTML = '';
         this.appendChild(frag.content)
         fortune.unlucky ? document.querySelector(".page").style.backgroundColor = "#e94e15" : document.querySelector(".page").style.backgroundColor = "#59ba9d"
-        cards.fortune.iter++;
+        iter++;
         localStorage.setItem('cards', JSON.stringify(cards))
     }
 }
@@ -571,7 +571,7 @@ class cultureCard extends slotElement {
         this.innerHTML = '';
         this.appendChild(frag.content)
         let selected = document.querySelectorAll(`[data-prop = "${player}"]`).forEach(el => el.classList.add('selected'))
-        cards.culture.iter++;
+        iter++;
         localStorage.setItem('cards', JSON.stringify(cards))
     }
 
