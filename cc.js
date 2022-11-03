@@ -10,7 +10,7 @@ let gameNumber = 'game';
 let player;
 
 const pages = {
-    "index.html": "lang-page",
+    "": "lang-page",
     "players": "player-page",
     "scores": "score-page",
     "materials": "materials-page",
