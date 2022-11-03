@@ -10,7 +10,7 @@ let gameNumber = 'game';
 let player;
 
 const pages = {
-    "": "lang-page",
+    "index.html": "lang-page",
     "players": "player-page",
     "scores": "score-page",
     "materials": "materials-page",
@@ -86,11 +86,11 @@ const navigate = async () => {
     let newPage = document.createElement(page)
     newPage.className = 'page';
     let current = document.querySelector('.page')
-    if(current){
-    	current.disconnect();
-    	current.parentNode.replaceChild(newPage, current)
+    if (current) {
+        current.disconnect();
+        current.parentNode.replaceChild(newPage, current)
     }
-	else {document.querySelector('body').appendChild(newPage);}
+    else { document.querySelector('body').appendChild(newPage); }
 };
 
 const clickHandle = event => {
@@ -297,11 +297,8 @@ class culturePage extends baseElement {
         target.remove()
         let visible = document.querySelectorAll('.hide');
         visible.forEach(x => x.remove())
-        console.log(visible)
         let hidden = document.querySelectorAll('.hidden')
-        console.log(hidden)
         hidden.forEach(x => x.classList.remove('hidden'))
-        console.log('hidden done')
     }
     connectedCallback() { this.render('culture-page'); super.connectedCallback() }
 }
@@ -387,7 +384,7 @@ class playerBoard extends slotElement {
             str +=
                 `<input type="text"  ${p.name ? `value = "${p.name}"` : `placeholder = "P${i + 1}"`}><svg data-event = "minus" class = 'svg-icon' class = 'svg-icon' data-index = ${i} fill="none" xmlns="http://www.w3.org/2000/svg" > <use href="#minus"/></svg>`
         };
-	str += `<svg data-event='start' data-page='scores' class="svg-icon" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#play" /></svg>`
+        str += `<svg data-event='start' data-page='scores' class="svg-icon" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#play" /></svg>`
         str += `<svg data-event="plus" class='svg-icon' class='svg-icon back' fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#plus" /></svg>`
         frag.innerHTML = str;
         this.innerHTML = '';
@@ -401,7 +398,8 @@ class scoreBoard extends slotElement {
     constructor() { super() }
 
     diff() {
-        let get = JSON.parse(localStorage.getItem(gameNumber));
+        let find = localStorage.getItem(gameNumber);
+        let get = JSON.parse(find) || { players: [] }
         let players = get.players;
         let frag = document.createElement('template')
         let str = "";
@@ -434,7 +432,6 @@ class triviaCard extends slotElement {
     async diff() {
         let url = this.dataset.url
         let clang = this.dataset.clang;
-        console.log(clang)
         let get = localStorage.getItem('cards')
         if (get == undefined) { await super.setCards(); get = localStorage.getItem('cards') }
         let cards = JSON.parse(get);
@@ -444,7 +441,6 @@ class triviaCard extends slotElement {
         if (!cards.trivia[clang] || cards.trivia[clang].deck.length !== parsed.length) cards.trivia[clang] = { deck: [...Array(parsed.length).keys()].shuffle(), iter: 0 }
         let iter = cards.trivia[clang].iter;
         let deck = cards.trivia[clang].deck;
-        console.log(deck)
         if (iter >= deck.length) { iter = 0; cards.trivia[clang].iter = 0; cards.trivia[clang].deck = [...Array(deck.length).keys()].shuffle(); }
         let trivia = parsed[deck[iter]]
         let frag = document.createElement('template')
@@ -462,7 +458,7 @@ class triviaCard extends slotElement {
         this.innerHTML = '';
         this.appendChild(frag.content)
         let selected = document.querySelectorAll(`[data-prop = "${player}"]`).forEach(el => el.classList.add('selected'))
-        iter++;
+        cards.trivia[clang].iter++;
         localStorage.setItem('cards', JSON.stringify(cards))
     }
 
@@ -491,7 +487,7 @@ class fortuneCard extends slotElement {
         this.innerHTML = '';
         this.appendChild(frag.content)
         fortune.unlucky ? document.querySelector(".page").style.backgroundColor = "#e94e15" : document.querySelector(".page").style.backgroundColor = "#59ba9d"
-        iter++;
+        cards.fortune[lang].iter++
         localStorage.setItem('cards', JSON.stringify(cards))
     }
 }
@@ -501,20 +497,16 @@ class cultureCard extends slotElement {
     async diff() {
         let url = this.dataset.url
         let clang = this.dataset.clang;
-        console.log(clang)
         let get = localStorage.getItem('cards')
         if (get == undefined) { await super.setCards(); get = localStorage.getItem('cards') }
         let cards = JSON.parse(get);
         let find = await fetch(url)
         if (!find.ok) return alert('network connection error')
         let parsed = await find.json();
-	    console.log(cards);
-	    console.log(`${cards.culture[clang].deck.length} --- ${parsed.length}`)
         if (!cards.culture[clang] || cards.culture[clang].deck.length !== parsed.length) cards.culture[clang] = { deck: [...Array(parsed.length).keys()].shuffle(), iter: 0 }
 
         let iter = cards.culture[clang].iter;
         let deck = cards.culture[clang].deck;
-        console.log(deck)
         if (iter >= deck.length) { iter = 0; cards.culture[clang].iter = 0; cards.culture[clang].deck = [...Array(deck.length).keys()].shuffle(); }
 
         let culture = parsed[deck[iter]]
@@ -571,9 +563,7 @@ class cultureCard extends slotElement {
         this.innerHTML = '';
         this.appendChild(frag.content)
         let selected = document.querySelectorAll(`[data-prop = "${player}"]`).forEach(el => el.classList.add('selected'))
-        iter++;
-	    console.log(iter);
-	    console.log(cards);
+        cards.culture[clang].iter++;
         localStorage.setItem('cards', JSON.stringify(cards))
     }
 
