@@ -572,6 +572,8 @@ class cultureCard extends slotElement {
         this.appendChild(frag.content)
         let selected = document.querySelectorAll(`[data-prop = "${player}"]`).forEach(el => el.classList.add('selected'))
         iter++;
+	    console.log(iter);
+	    console.log(cards);
         localStorage.setItem('cards', JSON.stringify(cards))
     }
 
