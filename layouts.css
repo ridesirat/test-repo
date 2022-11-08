@@ -432,8 +432,9 @@ top-box>.back {
 	margin-left: 0rem;
 }
 
-top-box>.cclogo {
-	margin-right: 2rem;
+top-box > .cclogo {
+	margin-right: .7rem;
+	margin-top: .5rem;
 }
 
 top-box>h1 {
@@ -445,7 +446,6 @@ top-box>h1 {
 	display: inline-block;
 	width: 6rem;
 	height: 3.5rem;
-
 }
 
 .page {
@@ -460,8 +460,8 @@ top-box>h1 {
 	align-items: flex-end;
 }
 
-.page>* {
-	margin-block: auto;
+.page > * {
+	/* margin-block: auto; */
 }
 
 .page> :first-child {
@@ -483,6 +483,8 @@ top-box>h1 {
 	width: 100%;
 	text-align: center;
 	color: var(--color-red);
+	word-wrap: anywhere;
+	line-height: 1;
 }
 
 fortune-page.page h1 {
@@ -492,6 +494,22 @@ fortune-page.page h1 {
 	font-weight: 100;
 	margin-top: 5rem;
 	margin-bottom: 1rem;
+	/* font-family: Courier, Isoc, sans-serif; */
+	letter-spacing: 0px;
+}
+
+culture-page.page h1 {
+	text-transform: uppercase;
+	font-weight: 100;
+	/* font-family: 'Arial Narrow', Arial, sans-serif; */
+	letter-spacing: 0px;
+}
+
+trivia-page.page h1 {
+	text-transform: uppercase;
+	font-weight: 100;
+	/* font-family: Isoc, arial, sans-serif; */
+	letter-spacing: 0px;
 }
 
 fortune-page.page p {
@@ -528,6 +546,13 @@ trivia-card.center {
 	font-size: 1.8rem;
 }
 
+.culture-option {
+	text-align: center;
+	color: #fff;
+	background-color: var(--color-red);
+	margin: 3rem 40% 1rem;
+}
+
 button {
 	/* font-size: 1.5rem; */
 	color: #333;
@@ -548,7 +573,12 @@ button[data-val] {
 	font-size: 1.7rem;
 	display: block;
 	margin: 1.5rem auto;
+	line-height: 1;
 	padding: 1rem;
+}
+
+culture-card.center button {
+	margin: 0 auto;
 }
 
 .btns-update {
@@ -784,108 +814,3 @@ img {
 .turn {
 	margin: 3rem 0 4rem;
 }
-
-.body-dice {
-	background: 0 0 / 10% url("xadrez-chegada.svg");
-	display: grid;
-	place-items: center;
-	justify-content: space-evenly;
-	min-height: 100vh;
-	width: 100%;
-}
-
-.dado-box {
-			--pbox: 2rem;
-			/* height: 70vh; */
-			max-height: 661px;
-			width: 100%;
-			max-width: calc(665px + var(--pbox));
-			/* padding: var(--pbox); */
-			border: var(--cor-verde) 1rem solid;
-			background: #fff;
-			overflow: hidden;
-			display: grid;
-			place-content: center;
-			padding: 0;
-		}		
-/* A imagem está dentro da box */
-#img_dado {
-			display: block;
-			max-height: 50vh;
-			transition: .5s ease;
-			max-width: 70vw;
-			background: #fff;
-			padding: 1rem;
-		}
-
-		@media (min-width: 360px) {
-			.dado-box {
-				border: var(--cor-verde) 2rem solid;
-			}
-
-			#img_dado {
-				padding: 2rem;
-			}
-		}		
-
-.rola {
-			animation: rola .7s cubic-bezier(.7,1.4,.9,1);
-		}
-
-		@keyframes rola {
-			0% { 
-				transform: rotate(0deg);
-			}
-			10% { 
-				transform: translate(50%, -30%) rotate(140deg);
-			}
-			50% { 
-				transform: translate(-50%, -50%) rotate(880deg);
-			}
-			80% {
-				transform: translate(-10%, 0%) rotate(1075deg);
-			}
-			100% {
-				transform: rotate(1080deg);
-			}
-		}		
-
-.rolar-button {
-			display: block;
-			width: 120px;
-			height: 120px;
-			background: url("btn-dice_roll.svg") #fff no-repeat center;
-			/* margin: 2rem 0; */
-			border: solid 1rem var(--cor-verde);
-			cursor: pointer;
-			font-size: 2rem;
-			color: #fff;
-			border-radius: 500px;
-			box-shadow: 10px 10px 10px hsla(0 0% 0% / 0.6);
-		}		
-
-.rolar-button:active {
-			display: block;
-			width: 110px;
-			height: 110px;
-			box-shadow: 5px 2px 5px hsl(0 0% 0% /.5);
-			border: solid .8rem var(--cor-verde);
-			transform: rotate(450deg);
-			transition: transform .8s ease-out;
-}		
-.visible{display: inherit;}
-.hidden{display: none;}
-
-.refresh {
-			display: block;
-			width: 3rem;
-			height: 3rem;
-			
-			/* margin: 2rem 0; */
-			border: solid .25rem var(--cor-verde);
-			cursor: pointer;
-		
-			color: #fff;
-			
-			box-shadow: 10px 10px 10px hsla(0 0% 0% / 0.6);
-		}		
