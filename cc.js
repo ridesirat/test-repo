@@ -1,5 +1,4 @@
-// Steve :: 28-10-2022 - 13h
-// Ricardo :: 31-10-2022 - 15h
+// This is a Pull Request
 
 const origin = ""//"https://culturecrossover.eu";
 let lang = "eng";
@@ -26,6 +25,7 @@ const translate = {
 		fortune: "Fortune",
 		culture: "Culture",
 		trivia: "Trivia"
+		// Waiting for decision on translation countries format
 		// "Albania",
 		// "Cape verde",
 		// "Chechnya",
@@ -248,7 +248,7 @@ class scorePage extends baseElement {
 		document.querySelector('[part = "temp-lit"]').diff()
 	}
 
-	// Dice
+	// Dice - Keeping in separate window for now
 	dice() { window.open("https://app.culturecrossover.eu/dice/"); }
 	connectedCallback() { this.render('score-page'); super.connectedCallback() }
 }
@@ -319,8 +319,7 @@ class culturePage extends baseElement {
 	connectedCallback() { this.render('culture-page'); super.connectedCallback() }
 }
 
-// Turn off?
-
+// Dice page
 class dicePage extends baseElement {
 	constructor() { super() }
 	roll() {
