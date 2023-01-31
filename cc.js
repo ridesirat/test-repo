@@ -1,4 +1,4 @@
-// This is a Pull Request
+// v10 - 09-01-2023
 
 const origin = ""//"https://culturecrossover.eu";
 let lang = "eng";
@@ -24,59 +24,57 @@ const translate = {
 		players: "Players",
 		fortune: "Fortune",
 		culture: "Culture",
-		trivia: "Trivia"
-		// Waiting for decision on translation countries format
-		// "Albania",
-		// "Cape verde",
-		// "Chechnya",
-		// "China",
-		// "Egypt",
-		// "France",
-		// "Germany",
-		// "Ghana",
-		// "Greece",
-		// "Ireland",
-		// "Italy",
-		// "Poland",
-		// "Portugal",
-		// "Syria",
-		// "Ukraine"
+		trivia: "Trivia",
+		countries: ["Albania", "Cape verde", "Chechnya", "China", "Egypt", "France", "Germany", "Ghana", "Greece", "Ireland", "Italy", "Poland", "Portugal", "Syria", "Ukraine"],
+		info:["RULES", "REFRESH", "Restart all the scores. Attention, it’s not undoable", "INSTALL", "Install the App on your phone, computer or other device and play the game offline, anytime!", "This App was<br>brought to you by", "and developed by<br>Sugodesign with the<br>collaboration of Steve Mills"]
 	},
 	pol: {
 		players: "Osoby grające",
 		fortune: "Karta losu",
 		culture: "Karty kultury",
-		trivia: "Karty ciekawostek"
+		trivia: "Karty ciekawostek",
+		countries: ["Albania", "Republika Zielonego Przylądka", "Czeczenia", "Chiny", "Egipt", "Francja", "Niemcy", "Ghana", "Grecja", "Irlandia", "Włochy", "Polska", "Portugalia", "Syria", "Ukraina"],
+		info:["POL-RULES", "POL-REFRESH", "Restart all the scores. Attention, it’s not undoable", "INSTALL", "Install the App on your phone, computer or other device and play the game offline, anytime!", "This App was<br>brought to you by", "and developed by<br>Sugodesign with the<br>collaboration of Steve Mills"]
 	},
 	ger: {
 		players: "Spieler*innen",
 		fortune: "Glück",
 		culture: "Kultur",
-		trivia: "Wissen"
+		trivia: "Wissen",
+		countries: ["Albanien", "Kap Verde", "Tschetschenien", "China", "Ägypten", "Frankreich", "Deutschland", "Ghana", "Griechenland", "Irland", "Italien", "Polen", "Portugal", "Syrien", "Ukraine"],
+		info:["RULES", "REFRESH", "Restart all the scores. Attention, it’s not undoable", "INSTALL", "Install the App on your phone, computer or other device and play the game offline, anytime!", "This App was<br>brought to you by", "and developed by<br>Sugodesign with the<br>collaboration of Steve Mills"]
 	},
 	ita: {
 		players: "Giocatoris",
 		fortune: "Fortuna",
 		culture: "Cultura",
-		trivia: "Curiosità"
+		trivia: "Curiosità",
+		countries: ["Albania", "Cape verde", "Chechnya", "China", "Egypt", "France", "Germany", "Ghana", "Greece", "Ireland", "Italy", "Poland", "Portugal", "Syria", "Ukraine"],
+		info:["RULES", "REFRESH", "Restart all the scores. Attention, it’s not undoable", "INSTALL", "Install the App on your phone, computer or other device and play the game offline, anytime!", "This App was<br>brought to you by", "and developed by<br>Sugodesign with the<br>collaboration of Steve Mills"]
 	},
 	por: {
 		players: "Jogadores",
 		fortune: "Sorte",
 		culture: "Cultura",
-		trivia: "Curiosidades"
+		trivia: "Curiosidades",
+		countries: ["Albânia", "Cabo Verde", "Chechénia", "China", "Egipto", "França", "Alemanha", "Gana", "Grécia", "Irelanda", "Itália", "Polónia", "Portugal", "Síria", "Ucrânia"],
+		info:["RULES", "REFRESH", "Restart all the scores. Attention, it’s not undoable", "INSTALL", "Install the App on your phone, computer or other device and play the game offline, anytime!", "This App was<br>brought to you by", "and developed by<br>Sugodesign with the<br>collaboration of Steve Mills"]
 	},
 	gre: {
 		players: "ΠΑΙΧΤΕΣ",
 		fortune: "ΤΥΧΗΣ",
 		culture: "ΠΟΛΙΤΙΣΜΟΥ",
-		trivia: "Trivia"
+		trivia: "Trivia",
+		countries: ["Αλβανία", "Πράσινο Ακρωτήριο", "Τσετσενία", "Κίνα", "Αίγυπτος", "Γαλλία", "Γερμανία", "Γκάνα", "Ελλάδα", "Ιρλανδία", "Ιταλία", "Πολωνία", "Πορτογαλία", "Συρία", "Ουκρανία"],
+		info:["RULES", "REFRESH", "Restart all the scores. Attention, it’s not undoable", "INSTALL", "Install the App on your phone, computer or other device and play the game offline, anytime!", "This App was<br>brought to you by", "and developed by<br>Sugodesign with the<br>collaboration of Steve Mills"]
 	},
 	ukr: {
 		players: "Граче",
 		fortune: "Карта фортуни",
 		culture: "Карти культури",
-		trivia: "Цікавий факт"
+		trivia: "Цікавий факт",
+		countries: ["Албанія", " Кабо-Верде", "Чечня", "Китай", "Єгипет", "Франція", "Німеччи", "Гана", "Греція", "Ірланді", "Італія", "Польща", "Португалія", "Сирія", "Україна"],
+		info:["RULES", "REFRESH", "Restart all the scores. Attention, it’s not undoable", "INSTALL", "Install the App on your phone, computer or other device and play the game offline, anytime!", "This App was<br>brought to you by", "and developed by<br>Sugodesign with the<br>collaboration of Steve Mills"]
 	}
 
 }
