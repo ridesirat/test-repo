@@ -815,6 +815,57 @@ img {
 	margin: 3rem 0 4rem;
 }
 
+.info {
+	width: 23rem;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: var(--color-bkg);
+}
+
+.info .info__btn-txt {
+	color: var(--color-green);
+	font-size: 1.8rem;
+}
+
+.info p {
+	text-align: center;
+	margin: 0 0 4rem;
+	font-size: 1.5rem;
+}
+
+.info__logos {
+	margin: -3rem 0 2rem;
+	font-size: .8rem;
+}
+
+.info__description {
+	display: block;
+	line-height: 120%;
+	font-size: 1.5rem;
+	width: 25ch;
+	text-align: center;
+	margin: .5rem 0 0;
+}
+
+.info__game {
+	background-color: #59ba9d;
+	padding: 2rem 0;
+}
+
+.info .svg-icon {
+	padding: .5rem 0;
+}
+
+.info .svg-icon:hover {
+	background-color: var(--color-red);
+	padding: .5rem;
+	border-radius: 20%;
+}
+
+
+
 /*****    DICE   *****/
 /* Off for now */
 
